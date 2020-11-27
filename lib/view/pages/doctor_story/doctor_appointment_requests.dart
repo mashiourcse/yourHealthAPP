@@ -144,6 +144,7 @@ class _DoctorAppointmentRequestsState extends State<DoctorAppointmentRequests> {
            // print(snapshot.data.length);
 
             return ListView.builder(
+
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
                   return Card(
@@ -207,7 +208,7 @@ class _DoctorAppointmentRequestsState extends State<DoctorAppointmentRequests> {
       'patientName': appointment.patientName,
       'doctorName': appointment.doctorName,
       'date': appointment.date,
-      'time': appointment.time,
+      'time': appointmentTime,
       'message': appointment.message,
       'patientId': appointment.patientId,
       'doctorId': appointment.doctorId,
