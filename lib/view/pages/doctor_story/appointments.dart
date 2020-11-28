@@ -47,7 +47,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
          // print(snapshot.data.length);
           numberOfAppointments = snapshot.data.length;
          // print(numberOfAppointments);
+          snapshot.data.toList().reversed;
           return ListView.builder(
+
+
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return Card(

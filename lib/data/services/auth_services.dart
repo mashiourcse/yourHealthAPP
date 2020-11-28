@@ -230,6 +230,16 @@ class AuthenticationService {
         .map((_listAppointmentsFromSnapshot));
   }
 
+  Stream<List<Appointment>> acceptedAppointmentsForAPP(String doctorUid) {
+    String uid = doctorUid;
+
+    return _fireStore
+        .collection('doctors')
+        .doc(uid)
+        .collection('appointments')
+        .snapshots()
+        .map((_listAppointmentsFromSnapshot));
+  }
 
   // List of messages
   List<Message> _listMessagesFromSnapshot(QuerySnapshot snapshot) {

@@ -31,6 +31,7 @@ class AppointmentRequests extends StatelessWidget {
             //   print(doc.time);
             //   print(doc.message);
             // }
+            print(snapshot.data.length);
             return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {

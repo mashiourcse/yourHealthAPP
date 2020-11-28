@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yourhealth/data/models/doctor.dart';
+import 'package:yourhealth/data/services/auth_services.dart';
 import 'package:yourhealth/view/pages/patient_story/patient_home.dart';
 import 'package:intl/intl.dart';
-
+// visiting Hour
+// max number of appointments
+// appointment List length
 class MakeAppointment extends StatefulWidget {
   final Doctor doctor;
 
@@ -33,6 +36,63 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
   String _message = '';
 
+  var visitingHour;
+  var docUID;
+  var appointmentListLength;
+  var maxNoAppointments;
+
+  int maxNumberOfApp(String visitingHour){
+
+    String x = visitingHour;
+
+    int startHour = int.parse(x.substring(0, 2));
+    int startMin = int.parse(x.substring(3, 5));
+    String startPeriod = x.substring(6, 8);
+
+//   print('$startHour $startMin $startPeriod');
+    startHour = startPeriod == 'PM' ? startHour + 12 : startHour;
+
+    int endHour = int.parse(x.substring(11, 13));
+    int endMin = int.parse(x.substring(14, 16));
+    String endPeriod = x.substring(17, 19);
+//   print('$endHour $endMin $endPeriod');
+    endHour = endPeriod == 'PM' ? endHour + 12 : endHour;
+
+    final now = DateTime.now();
+    var dt = DateTime(now.year, now.month, now.day, startHour, startMin);
+    var endDt = DateTime(now.year, now.month, now.day, endHour, endMin);
+    var diff = endDt.difference(dt).inMinutes;
+
+    //print(diff);
+    var maxNoApp = diff/20;
+
+//  print(maxNoApp);
+
+    return maxNoApp.toInt();
+
+  }
+
+
+  _getProfileData() async {
+
+    String uid = widget.doctor.uid; //Fwidget.doctor.ui
+
+    DocumentSnapshot snapshot =
+    await FirebaseFirestore.instance.collection('doctors').doc(uid).get();
+    var _profileData = snapshot.data();
+    //print(_profileData);
+    setState(() {
+      visitingHour = _profileData['visitingHour'];
+      //  print("Visting Hour: " + visitingHour);
+      //  getAppointmentTime(visitingHour, 5);
+    });
+    print(visitingHour);
+    var x = visitingHour;
+    maxNoAppointments = maxNumberOfApp(x);
+    print('Max number of app: ${maxNoAppointments}');
+    print('Appointments List length: ${appointmentListLength}');
+
+  }
   @override
   void initState() {
     super.initState();
@@ -42,7 +102,25 @@ class _MakeAppointmentState extends State<MakeAppointment> {
     _minute = _selectedTime.minute.toString();
     _time = _hour + ' : ' + _minute;
     _timeController.text = _time;
+//need to build a new fuction with Widget.uid
+    String uid;
+    AuthenticationService().acceptedAppointmentsForAPP(widget.doctor.uid).listen((value) {
+      setState(() {
+        //Number Of Appointment Approved
+        appointmentListLength = value.length;
+       // print(value.length);
+      });
+    });
+
+    _getProfileData();
+
   }
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,37 +148,37 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5),
               ),
-              // InkWell(
-              //   onTap: () {
-              //     _showDatePicker(context);
-              //   },
-              //   child: Container(
-              //     width: _width / 1.7,
-              //     height: _height / 9,
-              //     margin: EdgeInsets.only(top: 30),
-              //     alignment: Alignment.center,
-              //     decoration: BoxDecoration(color: Colors.grey[200]),
-              //     child: TextFormField(
-              //       style: TextStyle(fontSize: 40),
-              //       textAlign: TextAlign.center,
-              //       enabled: false,
-              //       keyboardType: TextInputType.text,
-              //       controller: _dateController,
-              //       onSaved: (String val) {
-              //         _setDate = val;
-              //       },
-              //       decoration: InputDecoration(
-              //           disabledBorder:
-              //               UnderlineInputBorder(borderSide: BorderSide.none),
-              //           // labelText: 'Time',
-              //           contentPadding: EdgeInsets.only(top: 0.0)),
-              //     ),
-              //   ),
-              // ),
+              InkWell(
+                onTap: () {
+                  _showDatePicker(context);
+                },
+                child: Container(
+                  width: _width / 1.7,
+                  height: _height / 9,
+                  margin: EdgeInsets.only(top: 30),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  child: TextFormField(
+                    style: TextStyle(fontSize: 40),
+                    textAlign: TextAlign.center,
+                    enabled: false,
+                    keyboardType: TextInputType.text,
+                    controller: _dateController,
+                    onSaved: (String val) {
+                      _setDate = val;
+                    },
+                    decoration: InputDecoration(
+                        disabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide.none),
+                        // labelText: 'Time',
+                        contentPadding: EdgeInsets.only(top: 0.0)),
+                  ),
+                ),
+              ),
               Text(
-                'Choose Time',
+                'Doctor will see your short massage and after acceptinng appoinment you will get yout time',
                 style: TextStyle(
-                    fontStyle: FontStyle.italic,
+                    fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5),
               ),
@@ -155,7 +233,10 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                   ),
                 ),
               ),
+              (appointmentListLength<maxNoAppointments) ?
               Builder(builder: (buttonContext) {
+
+                
                 return RaisedButton(
                   elevation: 10,
                   onPressed: () {
@@ -171,7 +252,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                           backgroundColor: Colors.white,
                         ),
                 );
-              }),
+              }) : Text("Doctor Busy! Come Back Later. Thank You!")
             ],
           ),
         ),

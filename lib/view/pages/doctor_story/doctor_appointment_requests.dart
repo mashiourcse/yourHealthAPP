@@ -98,10 +98,10 @@ class _DoctorAppointmentRequestsState extends State<DoctorAppointmentRequests> {
 
     _getProfileData();
   }
-
+//doctor id
   _getProfileData() async {
 
-    String uid = FirebaseAuth.instance.currentUser.uid;
+    String uid = FirebaseAuth.instance.currentUser.uid; //Fwidget.doctor.ui
     DocumentSnapshot snapshot =
     await FirebaseFirestore.instance.collection('users').doc(uid).get();
     var _profileData = snapshot.data();
