@@ -118,10 +118,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
 
 
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;

@@ -22,6 +22,44 @@ class _AppointmentPageState extends State<AppointmentPage> {
   var _searchQuery;
   var numberOfAppointments;
 
+  AsyncSnapshot<List<Appointment>> bubbleSort(AsyncSnapshot<List<Appointment>> snapshot){
+    numberOfAppointments = snapshot.data.length;
+    // print(numberOfAppointments);
+    //snapshot.data.toList().reversed;
+    Appointment temp;
+    int com1; int com2;
+    for( int i=0; i<numberOfAppointments-1; i++){
+
+      for( int j=0; j<numberOfAppointments-i-1; j++) {
+        com1 = timeSize(snapshot.data[j].time);
+        com2 = timeSize(snapshot.data[j+1].time);
+
+        if (com1 > com2) {
+          temp = snapshot.data[j];
+          snapshot.data[j] = snapshot.data[j + 1];
+          snapshot.data[j + 1] = temp;
+        }
+      }
+      //print( '${snapshot.data[i].time} = ${com1}');
+    }
+
+    return snapshot;
+  }
+
+  int timeSize(String visitingHour){
+
+    String x = visitingHour;
+    int startHour = int.parse(x.substring(0, 2));
+    int startMin = int.parse(x.substring(3, 5));
+    String startPeriod = x.substring(6, 8);
+
+    startHour = startPeriod == 'PM' ? startHour + 12 : startHour;
+
+    int time1 = (startHour*60) + startMin;
+
+    return time1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +83,8 @@ class _AppointmentPageState extends State<AppointmentPage> {
           //   print(doc.message);
           // }
          // print(snapshot.data.length);
-          numberOfAppointments = snapshot.data.length;
-         // print(numberOfAppointments);
-          snapshot.data.toList().reversed;
+
+           snapshot = bubbleSort(snapshot);
           return ListView.builder(
 
 
