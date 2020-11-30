@@ -1,0 +1,26 @@
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:24
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:142
+-keep class com.google.android.gms.auth.api.signin.RevocationBoundService { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:133
+-keep class com.google.android.gms.auth.api.signin.internal.SignInHubActivity { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:161
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:127
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:117
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:123
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:147
+-keep class com.google.firebase.auth.internal.FederatedSignInActivity { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:71
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:155
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:29
+-keep class com.reputationtechnology.yourhealth.MainActivity { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:24
+-keep class io.flutter.app.FlutterApplication { <init>(); }
+# Referenced at G:\NEWWORK\YourHealth\build\app\intermediates\merged_manifests\release\AndroidManifest.xml:107
+-keep class io.flutter.plugins.imagepicker.ImagePickerFileProvider { <init>(); }

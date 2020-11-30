@@ -145,9 +145,9 @@ class _PatientAppointmentsState extends State<PatientAppointments> {
                                           ''),
                                     ],
                                   ),
-                                  Text(snapshot.data.docs[index]
+                                  /*Text(snapshot.data.docs[index]
                                           .data()['speciality'] ??
-                                      ''),
+                                      ''),*/
                                   Row(
                                     children: [
                                       Icon(Icons.location_city),
