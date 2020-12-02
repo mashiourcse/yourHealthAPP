@@ -7,7 +7,7 @@
 7    <uses-sdk
 8        android:minSdkVersion="21"
 8-->G:\NEWWORK\YourHealth\android\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="29" />
+9        android:targetSdkVersion="30" />
 9-->G:\NEWWORK\YourHealth\android\app\src\main\AndroidManifest.xml
 10    <!--
 11         io.flutter.app.FlutterApplication is an android.app.Application that

@@ -95,8 +95,11 @@ class DoctorList extends StatelessWidget {
                                   speciality: snapshot.data[index].speciality,
                                   location: snapshot.data[index].location,
                                   visitingHour: snapshot.data[index].visitingHour,
-
+                                  email: snapshot.data[index].email,
+                                  phoneNumber: snapshot.data[index].phoneNumber,
                                 );
+
+                               // print('Phone Number: ${doctor.phoneNumber}');
                                 _showDoctorInfo(context, doctor);
                               }),
 
@@ -164,6 +167,14 @@ class DoctorList extends StatelessWidget {
                     fieldName: 'Location',
                     fieldData: doctor.location,
                   ),
+                   InfoWidget(
+                     fieldName: 'email',
+                     fieldData: doctor.email,
+                   ),
+                   InfoWidget(
+                     fieldName: 'Phone Number',
+                     fieldData: doctor.phoneNumber,
+                   ),
                 ],
               ),
             ),

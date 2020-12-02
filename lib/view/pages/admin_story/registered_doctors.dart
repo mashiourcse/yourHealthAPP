@@ -60,6 +60,20 @@ class RegisteredDoctorList extends StatelessWidget {
                                   Text(snapshot.data[index].location),
                                 ],
                               ),
+
+                              /*Row(
+                                children: [
+                                  Icon(Icons.email),
+                                  Text(snapshot.data[index].email),
+                                ],
+                              ),
+
+                              Row(
+                                children: [
+                                  Icon(Icons.phone),
+                                  Text(snapshot.data[index].phoneNumber),
+                                ],
+                              ),*/
                             ],
                           ),
                           Row(
@@ -79,6 +93,8 @@ class RegisteredDoctorList extends StatelessWidget {
                                       speciality: snapshot.data[index].speciality,
                                       location: snapshot.data[index].location,
                                       visitingHour: snapshot.data[index].visitingHour,
+                                      email: snapshot.data[index].email,
+                                      phoneNumber: snapshot.data[index].phoneNumber
 
                                     );
                                     _showDoctorInfo(context, doctor);
@@ -144,6 +160,14 @@ class RegisteredDoctorList extends StatelessWidget {
                   InfoWidget(
                     fieldName: 'Location',
                     fieldData: doctor.location,
+                  ),
+                  InfoWidget(
+                    fieldName: 'Email',
+                    fieldData: doctor.email,
+                  ),
+                  InfoWidget(
+                    fieldName: 'Phone Number',
+                    fieldData: doctor.phoneNumber,
                   ),
                 ],
               ),

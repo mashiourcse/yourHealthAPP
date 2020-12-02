@@ -145,7 +145,11 @@ class AuthenticationService {
           name: doc.data()['name'] ?? '',
           speciality: doc.data()['speciality'] ?? '',
           visitingHour: doc.data()['visitingHour'] ?? '',
-          location: doc.data()['location'] ?? '');
+          location: doc.data()['location'] ?? '',
+          email: doc.data()['email'] ?? '',
+        phoneNumber: doc.data()['phoneNumber'] ?? '',
+      );
+
     }).toList();
   }
 
