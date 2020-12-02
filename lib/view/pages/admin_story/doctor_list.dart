@@ -95,6 +95,7 @@ class DoctorList extends StatelessWidget {
                                   speciality: snapshot.data[index].speciality,
                                   location: snapshot.data[index].location,
                                   visitingHour: snapshot.data[index].visitingHour,
+                                  bmdcNumber: snapshot.data[index].bmdcNumber,
                                   email: snapshot.data[index].email,
                                   phoneNumber: snapshot.data[index].phoneNumber,
                                 );
@@ -162,6 +163,10 @@ class DoctorList extends StatelessWidget {
                   InfoWidget(
                     fieldName: 'Visiting Hour',
                     fieldData: doctor.visitingHour,
+                  ),
+                  InfoWidget(
+                    fieldName: 'BMDC Number',
+                    fieldData: doctor.bmdcNumber,
                   ),
                   InfoWidget(
                     fieldName: 'Location',
